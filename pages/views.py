@@ -1,5 +1,9 @@
+
+from django.shortcuts import get_object_or_404, render
+
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
+
 
 from pages.forms import FeedbackForm
 from pages.models import Book
@@ -32,6 +36,7 @@ def book_detail(request, pk):
     return render(request, 'pages/book_detail.html', context)
 
 
+
 def contact(request):
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
@@ -47,3 +52,4 @@ def contact(request):
         'form': form,
     }
     return render(request, 'pages/contact.html', context)
+main
