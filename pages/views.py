@@ -1,11 +1,7 @@
-
-from django.shortcuts import get_object_or_404, render
-
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
-
-from pages.forms import FeedbackForm
+from pages.forms import BookForm, FeedbackForm
 from pages.models import Book
 
 
@@ -36,6 +32,37 @@ def book_detail(request, pk):
     return render(request, 'pages/book_detail.html', context)
 
 
+def book_create(request):
+    form = BookForm(request.POST or None)
+    if form.is_valid():
+        book = form.save()
+        messages.success(request, 'Книга успешно добавлена.')
+        return redirect('book_detail', pk=book.pk)
+
+    context = {
+        'title': 'Добавить новую книгу',
+        'form': form,
+        'button_text': 'Сохранить',
+    }
+    return render(request, 'pages/book_form.html', context)
+
+
+def book_update(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    form = BookForm(request.POST or None, instance=book)
+    if form.is_valid():
+        book = form.save()
+        messages.success(request, 'Книга успешно обновлена.')
+        return redirect('book_detail', pk=book.pk)
+
+    context = {
+        'title': 'Редактировать книгу',
+        'form': form,
+        'button_text': 'Обновить',
+        'book': book,
+    }
+    return render(request, 'pages/book_form.html', context)
+
 
 def contact(request):
     if request.method == 'POST':
@@ -52,4 +79,3 @@ def contact(request):
         'form': form,
     }
     return render(request, 'pages/contact.html', context)
-main
