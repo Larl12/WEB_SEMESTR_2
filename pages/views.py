@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from pages.models import Book
 
@@ -19,3 +19,12 @@ def about(request):
         'description': 'Books Exchange — это площадка, где книги находят новых читателей.',
     }
     return render(request, 'pages/about.html', context)
+
+
+def book_detail(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    context = {
+        'title': book.title,
+        'book': book,
+    }
+    return render(request, 'pages/book_detail.html', context)
