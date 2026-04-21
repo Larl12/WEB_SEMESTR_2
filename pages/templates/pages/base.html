@@ -23,6 +23,9 @@
                             <a class="nav-link" href="{% url 'about' %}">О нас</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="https://github.com/Larl12/WEB_SEMESTR_2">GitHub</a>
                         </li>
                     </ul>
@@ -32,6 +35,16 @@
     </header>
 
     <main>
+        {% if messages %}
+        <div class="container pt-4">
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block content %}
         {% endblock %}
     </main>
@@ -42,6 +55,7 @@
             <div>
                 <a href="{% url 'home' %}" class="text-white text-decoration-none me-3">Главная</a>
                 <a href="{% url 'about' %}" class="text-white text-decoration-none me-3">О нас</a>
+                <a href="{% url 'contact' %}" class="text-white text-decoration-none me-3">Контакты</a>
                 <a href="https://github.com/Larl12/WEB_SEMESTR_2" class="text-white text-decoration-none">GitHub</a>
             </div>
         </div>
