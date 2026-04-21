@@ -16,44 +16,29 @@
 <section class="py-5">
     <div class="container">
         <div class="row g-4">
-            <div class="col-12 col-md-4">
-                <div class="card h-100">
-                    <img src="https://placehold.co/300x200" class="card-img-top" alt="Книга 1">
-                    <div class="card-body">
-                        <h5 class="card-title">1984</h5>
-                        <p class="card-text">
-                            Антиутопия Джорджа Оруэлла для обмена.
+            {% for book in books %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://placehold.co/600x400?text=Book" class="card-img-top" alt="{{ book.title }}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text text-muted">
+                            {{ book.description|truncatewords:20 }}
                         </p>
-                        <a href="{% url 'about' %}" class="btn btn-outline-primary">Подробнее</a>
+                        <p class="mt-auto mb-3">
+                            <span class="badge bg-primary">Доступно: {{ book.copies_available }}</span>
+                        </p>
+                        <small class="text-secondary">Добавлено: {{ book.created_at|date:"d.m.Y H:i" }}</small>
                     </div>
                 </div>
             </div>
-
-            <div class="col-12 col-md-4">
-                <div class="card h-100">
-                    <img src="https://placehold.co/300x200" class="card-img-top" alt="Книга 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Мастер и Маргарита</h5>
-                        <p class="card-text">
-                            Классика русской литературы в отличном состоянии.
-                        </p>
-                        <a href="{% url 'about' %}" class="btn btn-outline-primary">Подробнее</a>
-                    </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info text-center mb-0">
+                    К сожалению, книг пока нет. Заходите позже!
                 </div>
             </div>
-
-            <div class="col-12 col-md-4">
-                <div class="card h-100">
-                    <img src="https://placehold.co/300x200" class="card-img-top" alt="Книга 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Гарри Поттер</h5>
-                        <p class="card-text">
-                            Популярная серия книг для подростков и взрослых.
-                        </p>
-                        <a href="{% url 'about' %}" class="btn btn-outline-primary">Подробнее</a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
