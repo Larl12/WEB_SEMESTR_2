@@ -1,0 +1,25 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 mb-4">{{ title }}</h1>
+                <p class="lead">{{ description }}</p>
+                <p>
+                    Наш сервис помогает читателям находить книги для обмена, знакомиться с другими
+                    любителями литературы и давать книгам новую жизнь.
+                </p>
+                <p>
+                    На этом этапе проект учебный, но уже показывает ключевые возможности Django:
+                    шаблоны, маршруты, контекст и переиспользование общей структуры сайта.
+                </p>
+                <a href="{% url 'home' %}" class="btn btn-dark">Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
