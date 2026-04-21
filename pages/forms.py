@@ -1,5 +1,7 @@
 from django import forms
 
+from pages.models import Book
+
 
 class FeedbackForm(forms.Form):
     subject = forms.CharField(
@@ -31,3 +33,30 @@ class FeedbackForm(forms.Form):
             }
         ),
     )
+
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title', 'description', 'copies_available']
+        widgets = {
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Введите название книги',
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'rows': 5,
+                    'placeholder': 'Добавьте описание книги',
+                }
+            ),
+            'copies_available': forms.NumberInput(
+                attrs={
+                    'class': 'form-control',
+                    'min': 1,
+                }
+            ),
+        }
